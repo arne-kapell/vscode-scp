@@ -74,7 +74,7 @@ class Deploy {
                         if (this.config["host"].indexOf(".") != -1 && this.config["uploadOnSave"]) {
                             this.sshCommand(`cd ${this.config["remotePath"]}`).then((result) => {
                                 if (result["stderr"]) {
-                                    that.sshCommand(`mkdir ${that.config["remotePath"]}`).then((res) => {
+                                    that.sshCommand(`mkdir -p ${that.config["remotePath"]}`).then((res) => {
                                         if (res["stderr"]) {
                                             vscode.window.showErrorMessage(res["stderr"])
                                         } else {
@@ -116,7 +116,7 @@ class Deploy {
             const scp = new client.SCP(that.options)
             that.sshCommand(`cd ${remote_path}`).then((result) => {
                 if (result["stderr"]) {
-                    this.sshCommand(`mkdir ${remote_path}`).then((res) => {
+                    this.sshCommand(`mkdir -p ${remote_path}`).then((res) => {
                         if (res["stderr"]) {
                             vscode.window.showErrorMessage(res["stderr"])
                             resolve(false)
